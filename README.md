@@ -22,16 +22,18 @@ By completing this course, students will be able to:
 ## Labs Overview  
 This repository contains hands-on labs aligned with the course topics. Each lab is in its own 
 markdown file for easy navigation:  
-- [Lab 1: Install and Configure Apache/IIS Web Server](Lab1.md)  
-- [Lab 2: HTTP Basics](Lab2.md)  
-- [Lab 3: Introduction to Nginx](Lab3.md)  
-- [Lab 4: Basic Nginx Modules](Lab4.md)  
-- [Lab 5: Nginx LNMP Architecture](Lab5.md)  
-- [Lab 6: Web Security](Lab6.md)  
-- [Lab 7: Authentication and Authorization](Lab7.md)  
-- [Lab 8: Nginx Proxy and Load Balancing](Lab8.md)  
-- [Lab 9: Performance Optimization](Lab9.md)  
-- [Lab 10: Deployment and Logging](Lab10.md)  
+- [Lab 1:   Setup: VMWare Pro, Multipass, AWS EC2](Lab1.md)
+
+- [Lab 1:   Install and Configure Apache/IIS Web Server](Lab1.md)  
+- [Lab 2:   HTTP Basics](Lab2.md)  
+- [Lab 3:   Introduction to Nginx](Lab3.md)  
+- [Lab 4:   Basic Nginx Modules](Lab4.md)  
+- [Lab 5:   Nginx LNMP Architecture](Lab5.md)  
+- [Lab 6:   Web Security](Lab6.md)  
+- [Lab 7:   Authentication and Authorization](Lab7.md)  
+- [Lab 8:   Nginx Proxy and Load Balancing](Lab8.md)  
+- [Lab 9:   Performance Optimization](Lab9.md)  
+- [Lab 10:  Deployment and Logging](Lab10.md)  
 
 ## Tools and Resources  
 - **Virtualization:** VirtualBox, Vagrant  
