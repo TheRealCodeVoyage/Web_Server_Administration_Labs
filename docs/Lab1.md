@@ -50,33 +50,73 @@ sudo apt update && sudo apt upgrade -y
 ```
 
 ## Installing and Using Multipass on Your Computer
+
 Multipass is a lightweight VM manager for Linux, Windows, and macOS that allows you to create, manage, and configure Ubuntu instances with ease. Follow these steps to install Multipass on your computer:
+
 1. Download and Install Multipass:
-    - Go to the Multipass download page (https://multipass.run/install).
-    - Download the installer and follow the installation instructions.
+- Go to the Multipass download page (https://multipass.run/install).
+- Download the installer and follow the installation instructions.
 2. Verify the Installation:
 - Open a terminal or command prompt and type:
+```sh
 multipass version
+```
 - This command should return the version of Multipass installed, confirming the installation was successful.
 Using Multipass
-1. Launch an Ubuntu Instance:
+3. Launch an Ubuntu Instance:
 - To create and start a new Ubuntu instance, run:
+```sh
 multipass launch --name my-ubuntu
+```
 - Replace `my-ubuntu` with a name of your choice. This command will download the default Ubuntu image (usually the latest LTS version) and start the instance.
-2. Access the Ubuntu Instance:
+4. Access the Ubuntu Instance:
 - To access the Ubuntu instance, use:
+```sh
 multipass shell my-ubuntu
+```
 - This command will drop you into a shell session within your Ubuntu instance, where you can start running commands as if you were using a regular Ubuntu machine.
-3. Managing Instances:
+5. Managing Instances:
 - List Instances:
+```sh
 multipass list
+```
 This will show you all the instances you have created, along with their statuses.
- 
-ACIT3475
 - Stop an Instance:
+```sh
 multipass stop my-ubuntu
+```
 - Delete an Instance:
+```sh
 multipass delete my-ubuntu
+```
 After deleting an instance, run the following command to free up space:
+```sh
 multipass purge
+```
 Multipass also allows you to configure networking, mount directories from your host machine, and more. For additional commands and options, consult the Multipass documentation.
+
+## Launching a Virtual Machine with Linux
+
+1. Log in to your AWS Management Console.
+2. Ensure that you are in the desired AWS region for this lab (N. Virginia or US East). - Open the Amazon EC2 service in the AWS Management Console.
+3. Click on "Launch Instance" to start the instance launch wizard as shown below:
+![AWS Dashboard](images/lab1-fig14.png)
+- Select an Amazon Machine Image (AMI) that provides a Linux-based operating system, such as Amazon Linux or Ubuntu.
+4. Choose an instance type based on your requirements for CPU, memory, and storage.
+5. Configure instance details:
+- Number of instances: 1
+- Network: Select the desired VPC and subnet
+- Auto-assign Public IP: Enable
+- IAM role: (optional) Select an appropriate role if needed
+- Add storage:
+- Adjust the size and type of the root volume if necessary.
+- Configure security groups:
+- Create a new security group and configure inbound rules to allow SSH access (port 22) from
+your IP address.
+- Review the instance details and click "Launch."
+- Select an existing key pair or create a new one to access the instance securely via SSH (Download the
+key pair file to your local machine).
+6. Launch the instance and wait for it to start.
+7. Once the instance is running, note down the public IP address.
+8. Change the permissions of the key pair file to the appropriate permissions
+9. Connect to the VM using SSH from your computer and run some basic Linux commands like: `ls`, `pwd`, `hostname`.
