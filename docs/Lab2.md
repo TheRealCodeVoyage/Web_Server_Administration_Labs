@@ -307,6 +307,7 @@ You can now access this image by navigating to `http://<instance-public-ip>/imag
 - In IIS Manager, double-click Error Pages.
 - Click Add on the right-hand side, and configure a custom error page for 404 Not Found errors.
 - Create a simple `404.html` file in your website’s folder with a custom message, such as:
+
 ```html
 <h1>Oops! Page not found.</h1>
 ```
