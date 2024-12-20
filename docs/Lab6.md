@@ -136,8 +136,8 @@ server_name wsalab7.info www.wsalab7.info;
 ```sh
 sudo nginx -t
 ```
-
 Make sure the configuration test is successful.
+![Test Nginx Config](images/lab6-fig5.png)
  
 ### Step 15: If the test was successful, we need to create a symlink of the website’s config file into the site-enabled directory.
 ```sh
@@ -173,13 +173,13 @@ Notes:
 - Your certificate should be stored in /etc/ssl/certs
 - Adjust the paths in the nginx configuration to match the location of your certificate and key
 You WILL receive a security warning in any browser. This is normal for any self-signed certificate.
-
- 
+![self-sign cert security warning](images/lab6-fig6.png)
 
 Q2: Show your instructor 
 - the lines you added to your nginx configuration.
 - the certificate details seen in your browser (Certificate Viewer in Chrome)
-Part 3: Enforce HTTPS through nginx
+
+## Part 3: Enforce HTTPS through nginx
 - At this point you should be able to access your web server through http:// (Port 80) as well as https:// (Port 443). Our final goal is to configure nginx to automatically redirect all regular HTTP traffic to HTTPS.
 - Right now your configuration to support both ports might be either:
 - One server block with two ports defined
