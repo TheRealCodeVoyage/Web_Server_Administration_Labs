@@ -125,7 +125,8 @@ sudo apachectl configtest
 
 - Since the domain `mywebsite.com` is not a real domain, you need to map it to your VM’s IP address in the `/etc/hosts` file on your local machine.
 Add the following line (replace `<vm-ip-address>` with the actual IP):
-```txt
+
+```hosts
 <vm-ip-address> mywebsite.com
 ```
 
@@ -151,7 +152,8 @@ sudo nano /etc/apache2/apache2.conf
 ```
 
 - Find the section for `/var/www/` and modify the directory permissions:
-```conf
+
+```apache
 <Directory /var/www/>
     Options Indexes FollowSymLinks
     AllowOverride All
@@ -167,7 +169,8 @@ sudo nano /etc/apache2/conf-available/security.conf
 ```
 
 - Add the following headers:
-```conf
+
+```apache
 Header always set X-Content-Type-Options "nosniff"
 Header always set X-Frame-Options "DENY"
 Header always set X-XSS-Protection "1; mode=block"
