@@ -96,7 +96,8 @@ echo "<h1>My Website</h1>" | sudo tee /var/www/mywebsite/index.html
 sudo nano /etc/apache2/sites-available/mywebsite.conf
 ```
 - Add the following configuration:
-```conf
+
+```apache
 <VirtualHost *:80>
     ServerAdmin webmaster@mywebsite.com
     ServerName mywebsite.com
