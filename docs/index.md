@@ -3,16 +3,16 @@ This repository contains lab exercises for BCIT's ACIT 3475 Web Server Administr
 course. This course introduces students to the deployment and operation of web applications. Students will implement an existing application into a web stack including web servers, databases, and application servers, improving the stack throughout the course. Topics include Web Server Management, Application Servers, Load Balancing, Caching, Performance Measurement, Reverse Proxies, TLS/SSL Security, Authentication Mechanisms, and Centralized Logging.  
 
 ## Labs Index:
-- [Lab 1: Install and Configure Apache/IIS Web Server](Lab1.md)  
-- [Lab 2: HTTP Basics](Lab2.md)  
-- [Lab 3: Introduction to Nginx](Lab3.md)  
-- [Lab 4: Basic Nginx Modules](Lab4.md)  
-- [Lab 5: Nginx LNMP Architecture](Lab5.md)  
-- [Lab 6: Web Security](Lab6.md)  
-- [Lab 7: Authentication and Authorization](Lab7.md)  
-- [Lab 8: Nginx Proxy and Load Balancing](Lab8.md)  
-- [Lab 9: Performance Optimization](Lab9.md)  
-- [Lab 10: Deployment and Logging](Lab10.md)  
+- [Lab 1: Setup: VMWare Pro, Multipass, AWS EC2](Lab1.md)  
+- [Lab 2: Setting up and Configuring Apache Web Server and IIS](Lab2.md)  
+- [Lab 3: Exploring HTTP Headers and Protocols with cURL and Browser](Lab3.md)  
+- [Lab 4: Introduction to Nginx and Basic Module Configuration](Lab4.md)  
+- [Lab 5: Installing LAMP and LNMP Stacks with WordPress](Lab5.md)  
+- [Lab 6: SSL/TLS Certificate and Its Implemenetation](Lab6.md)  
+- [Lab 7: Implementation of OAuth with Express.js](Lab7.md)  
+- [Lab 8: Load Balancing with HAProxy](Lab8.md)  
+- [Lab 9: Nginx as Load Balancer, Forward Proxy, and Reverse Proxy](Lab9.md)  
+- [Lab 10: CDN and Logging](Lab10.md)  
 
 ### Key Learning Outcomes
 - Describe components of a scalable, distributed web stack.  
@@ -29,9 +29,17 @@ course. This course introduces students to the deployment and operation of web a
 To begin, please clone the repository and follow the setup instructions in each lab. You will 
 need a laptop with VMWare Workstation (or VirtualBox) and Docker, along with the required software mentioned in the labs.
 ```sh
-╔════════════════════════════════════════╗
-║╦ ╦┌─┐┌─┐┌─┐┬ ┬  ╦  ┌─┐┌─┐┬─┐┌┐┌┬┌┐┌┌─┐┬║
-║╠═╣├─┤├─┘├─┘└┬┘  ║  ├┤ ├─┤├┬┘││││││││ ┬│║
-║╩ ╩┴ ┴┴  ┴   ┴   ╩═╝└─┘┴ ┴┴└─┘└┘┴┘└┘└─┘o║
-╚════════════════════════════════════════╝
+ __   __  _______  _______  _______  __   __                              
+|  | |  ||   _   ||       ||       ||  | |  |                             
+|  |_|  ||  |_|  ||    _  ||    _  ||  |_|  |                             
+|       ||       ||   |_| ||   |_| ||       |                             
+|       ||       ||    ___||    ___||_     _|                             
+|   _   ||   _   ||   |    |   |      |   |                               
+|__| |__||__|_|__||___|___ |___|__    |___| _  ___   __    _  _______  __ 
+|   |    |       ||   _   ||    _ |  |  |  | ||   | |  |  | ||       ||  |
+|   |    |    ___||  |_|  ||   | ||  |   |_| ||   | |   |_| ||    ___||  |
+|   |    |   |___ |       ||   |_||_ |       ||   | |       ||   | __ |  |
+|   |___ |    ___||       ||    __  ||  _    ||   | |  _    ||   ||  ||__|
+|       ||   |___ |   _   ||   |  | || | |   ||   | | | |   ||   |_| | __ 
+|_______||_______||__| |__||___|  |_||_|  |__||___| |_|  |__||_______||__|
 ```

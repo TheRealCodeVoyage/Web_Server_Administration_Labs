@@ -1,4 +1,4 @@
-# Lab 6: SSL/TLS Certificate and Implemenetation
+# Lab 6: SSL/TLS Certificate and Its Implemenetation
 
 ## Part 1: Generate a self-signed TLS Certificate
 
