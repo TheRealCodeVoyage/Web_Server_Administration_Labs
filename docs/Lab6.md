@@ -23,20 +23,25 @@ This process should result in three files:
 
 ### Step 1: Launch a Multipass and Ensure the network is attached.
 On windows: 
+
 ```sh
 multipass launch -n wsa-lab-7 --network Wi-Fi
 ```
+
 On Mac/Unix: 
+
 ```sh
 multipass launch -n wsa-lab-7 --network bridged 
 ```
 
 ### Step 2: Update and Upgrade the System Packages
+
 ```sh
 sudo apt update && sudo apt upgrade -y
 ```
 
 ### Step 3: Install nginx
+
 ```sh
 sudo apt install nginx -y
 sudo systemctl start nginx
@@ -44,23 +49,27 @@ sudo systemctl enable nginx
 ```
 
 ### Step 4: Create a directory to store private key, public key and certificate.
+
 ```sh
 sudo mkdir -p /etc/nginx/ssl_key
 cd /etc/nginx/ssl_key
 ```
 
 ### Step 5: Install OpenSSL
+
 ```sh
 sudo apt install openssl -y
 ```
 
 ### Step 6: Generate a Private Key
+
 ```sh
 sudo openssl genpkey -algorithm RSA -out server.key
 ```
 ![generate private key](images/lab6-fig1.png)
  
 ### Step 7: Generate a Certificate Signing Request (CSR)
+
 ```sh
 sudo openssl req -new -key server.key -out csr.pem
 ```
@@ -69,19 +78,24 @@ During this step, you will be prompted to enter information such as the Common N
 ![Information details of SSL/TLS Cert](images/lab6-fig2.png)
  
 ### Step 8: Generate a Self-Signed Certificate
+
 ```sh
 sudo openssl x509 -req -days 365 -in csr.pem -signkey server.key -out server.crt
 ```
+
 ![Generate a Self-Signed Certificate](images/lab6-fig3.png)
 ### Step 9: Verify your key.
+
 ```sh
 sudo openssl req -in csr.pem -noout -verify -key server.key
 ```
+
 ![Verify your key](images/lab6-fig4.png)
 
 ## Part 2: Configure HTTPS in Nginx
 - The certificate and keys we configured previously are required for nginx to support HTTPS. The goal of our configuration will be to support HTTPS as well as non-HTTPS traffic. As HTTPS operates on a different port we need to configure nginx to listen on this port, and to enforce ssl. You can see an example configuration below. 
 - HTTPS in nginx can be configured similar to a virtual host in a new server block, or you can add the directives to your existing server block for Port 80. In that case you would not have to repeat any of your configuration (locations, proxy etc.) in your second server block.
+
 ```nginx
 server {
 listen	443 ssl;
@@ -92,16 +106,18 @@ ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
 }
 ```
 
-
 ### Step 10: Create a root directory for your website
+
 ```sh
 sudo mkdir -p /var/www/wsalab7.info
 ```
 
 ### Step 11: Create `index.html` file for the landing page of your website
+
 ```sh
 sudo nano /var/www/wsalab7.info/index.html
 ```
+
 ```html
 <h1>Add A Desired Title For Your Website</h1>
 ```
@@ -109,10 +125,13 @@ sudo nano /var/www/wsalab7.info/index.html
 ### Step 12: Configure Nginx
 Edit the Nginx configuration file using a text editor of your choice. 
 Choose a website you like to have. (eg. wsalab7.info)
+
 ```sh
 sudo nano /etc/nginx/sites-available/wsalab7.info
 ```
+
 ### Step 13: We need to define a server directive as below:
+
 ```nginx
 server {
     listen 443 ssl;
@@ -133,36 +152,44 @@ server_name wsalab7.info www.wsalab7.info;
 ```
 
 ### Step 14: Save (Ctrl+S) and Exit (Ctrl+X) the nano. Now we need to Test Nginx Configuration
+
 ```sh
 sudo nginx -t
 ```
+
 Make sure the configuration test is successful.
 ![Test Nginx Config](images/lab6-fig5.png)
  
 ### Step 15: If the test was successful, we need to create a symlink of the website’s config file into the site-enabled directory.
+
 ```sh
 sudo ln -s /etc/nginx/sites-available/wsalab7.info \
 /etc/nginx/sites-enabled/
 ```
+
 ### Step 16: Now it’s time to restart the nginx
+
 ```sh
 sudo systemctl restart nginx
 ```
 
 ### Step 17: Allow Nginx and SSH in the Firewall
+
 ```sh
 sudo ufw allow 'Nginx Full'
 sudo ufw allow OpenSSH
 sudo ufw enable
 ```
+
 ### Step 18: Before we perform the last test, we need to change the hosts file to be able to recognize the domain locally (on Ubuntu VM)
+
 ```sh 
 sudo nano /etc/hosts
 ```
+
 Add the line below to the hosts file:
 
 `127.0.0.1 wsalab7.info`
-
 
 ### Step 18: Perform the last test. Open a browser on your host machine and visit `http://<YOUR_VM_IP>`, and then `https://<YOUR_VM_IP>`
 
@@ -188,9 +215,11 @@ Q2: Show your instructor
 - The configuration in the non-HTTPS block is trivial:
 
 ### Step 19: This server block directive will help us enforce HTTPS. We need to add this directive to our server config file:
+
 ```sh
 sudo nano /etc/nginx/sites-available/wsalab7.info
 ```
+
 ```nginx
 server {
     listen 80;
@@ -203,6 +232,7 @@ server {
 - Test your site configuration with curl. You should receive a HTTP 301 Permanent Redirect when you request any part of your site through HTTP.
 
 Note: make sure to delete the default config file and its symlink to not have any issue when trying this last part:
+
 ```sh
 sudo rm /etc/nginx/sites-available/default \
 /etc/nginx/sites-enabled/default

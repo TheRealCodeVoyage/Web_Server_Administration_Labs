@@ -12,15 +12,19 @@ In this lab, you will set up HAProxy as a load balancer with AWS EC2 instances a
 
 3. Install Nginx on Each Instance
 Once connected, update the package list and install Nginx:
+
 ```sh
 sudo apt update
 sudo apt install nginx -y
 ```
+
 4. Customize Nginx Default Page
 Edit the default `index.html` on each instance to display a unique message:
+
 ```sh
 echo "Hello from server <Instance-ID-or-Name>" | sudo tee /var/www/html/index.html
 ```
+
 5. Retrieve Public IPs of EC2 Instances
 Note the public IP addresses of both EC2 instances, as they will be needed in the HAProxy configuration.
 
@@ -32,17 +36,22 @@ Note the public IP addresses of both EC2 instances, as they will be needed in th
  - Security Group: Open HTTP (port 80) and HTTPS (port 443) for client access and SSH (port 22) for remote access.
 2. Install HAProxy
 SSH into the HAProxy instance and install HAProxy:
+
 ```sh
 sudo apt update
 sudo apt install haproxy -y
 ```
+
 3. Configure HAProxy with AWS Backend Servers
 Open the HAProxy configuration file:
+
 ```sh
 sudo nano /etc/haproxy/haproxy.cfg
 ```
+
 Set up a frontend to listen on port 80 and define your backend servers:
-```
+
+```haproxy
 frontend http_front
     bind *:80
     default_backend aws_backends
@@ -52,12 +61,15 @@ backend aws_backends
     server aws1 <EC2-Instance1-IP>:80 check
     server aws2 <EC2-Instance2-IP>:80 check
 ```
+
 Replace `<EC2-Instance1-IP>` and `<EC2-Instance2-IP>` with the public IPs of your EC2 backend instances.
 4. Restart HAProxy
 Save the configuration and restart HAProxy:
+
 ```sh
 sudo systemctl restart haproxy
 ```
+
 ## Part 3: Test Load Balancing Algorithms
 - Round Robin Algorithm
 - Configuration:
@@ -77,39 +89,48 @@ sudo systemctl restart haproxy
 - Weighted Round Robin Algorithm
 - Configuration:
 `balance roundrobin`
-```plaintext
+
+```haproxy
 server aws1 <EC2-Instance1-IP>:80 check weight 2
 server aws2 <EC2-Instance2-IP>:80 check weight 1
 ```
+
 - Testing: Access repeatedly to observe that `aws1` receives more requests due to the higher weight.
 ---
 
 ## Part 4: Configuring Health Checks
 1. Enable Health Checks
 In the `backend` section, add the `check` option for each server to enable health checks:
-```plaintext
+
+```haproxy
 backend aws_backends
     balance roundrobin
     server aws1 <EC2-Instance1-IP>:80 check
     server aws2 <EC2-Instance2-IP>:80 check
 ```
+
 2. Advanced Health Check Options
 Use parameters like `inter`, `rise`, and `fall` for more control:
-```plaintext
+
+```haproxy
 server aws1 <EC2-Instance1-IP>:80 check inter 2000 rise 3 fall 2
 server aws2 <EC2-Instance2-IP>:80 check inter 2000 rise 3 fall 2
 ```
+
 3. Testing Health Checks
 - Stop Nginx on one backend
+
 ```sh
 sudo systemctl stop nginx
 ```
+
  and check the HAProxy stats page to verify that the server is marked as DOWN.
 - Restart Nginx and ensure it’s marked as UP after passing health checks.
 Part 5: Enabling Sticky Sessions
 1. Configure Sticky Sessions in HAProxy
 Modify the `backend` section to add `stick-table` and `stick on` directives:
-```plaintext
+
+```haproxy
 backend aws_backends
     balance roundrobin
     stick-table type ip size 200k expire 30m
@@ -117,17 +138,20 @@ backend aws_backends
     server aws1 <EC2-Instance1-IP>:80 check
     server aws2 <EC2-Instance2-IP>:80 check
 ```
+
 2. Testing Sticky Sessions
 - Access `http://<HAProxy-instance-IP>` multiple times from the same client IP and confirm consistent routing to the same backend server.
 
 ## Part 6: Monitoring HAProxy with Stats
 1. Enable HAProxy Stats Page
 Configure HAProxy to expose a stats page by adding a `stats` URI:
-```plaintext
+
+```haproxy
 frontend http_front
     bind *:80
     stats uri /haproxy?stats
     default_backend aws_backends
 ```
+
 2. Access the Stats Page
 Open `http://<HAProxy-instance-IP>/haproxy?stats` in your browser to view real-time monitoring, including connection counts, backend health, and server status.

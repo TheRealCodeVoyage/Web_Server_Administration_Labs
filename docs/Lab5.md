@@ -7,12 +7,14 @@ Use VMWare, Multipass, or AWS EC2 to create two VMs running Ubuntu Server 22.04 
 
 - Connect to the VMs:
 Once the VMs are created and running, use SSH to connect to each VM:
+
 ```sh
 ssh <username>@<VM-IP>
 ```
 
 - Update Each VM:
 Before installing any packages, ensure the system is up to date:
+
 ```sh
 sudo apt update && sudo apt upgrade -y
 ```
@@ -21,10 +23,12 @@ sudo apt update && sudo apt upgrade -y
 
 ### Step 1: Install Apache
 Install Apache Web Server:
+
 ```sh
 sudo apt install apache2 -y
 ```
 Start and Enable Apache:
+
 ```sh
 sudo systemctl start apache2
 sudo systemctl enable apache2
@@ -35,19 +39,23 @@ Open a web browser and visit `http://<VM-IP>`. You should see the default Apache
 
 ### Step 2: Install MySQL
 Install MySQL Server:
+
 ```sh
 sudo apt install mysql-server -y
 ```
 
 Secure MySQL Installation:
+
 ```sh
 sudo mysql_secure_installation
 ```
 
 Create a Database for WordPress:
+
 ```sh
 sudo mysql -u root -p
 ```
+
 ```sql
 CREATE DATABASE wordpressdb;
 CREATE USER 'wordpressuser'@'localhost' IDENTIFIED BY '!@#$%^ZXCVBNzxcvbn123456';
@@ -58,16 +66,20 @@ EXIT;
 
 ### Step 3: Install PHP
 Install PHP and Required Modules:
+
 ```sh
 sudo apt install php libapache2-mod-php php-mysql -y
 ```
 
 Test PHP Installation:
 Create a test PHP file:
+
 ```sh
 sudo nano /var/www/html/info.php
 ```
+
 Add the following code:
+
 ```php
 <?php phpinfo(); ?>
 ```
@@ -77,6 +89,7 @@ Open `http://<VM-IP>/info.php` in your browser to verify the PHP installation.
 ## Part 3: Installing WordPress on LAMP
 ### Step 1: Download and Configure WordPress
 Download and Extract WordPress:
+
 ```sh
 cd /var/www/html
 sudo wget https://wordpress.org/latest.tar.gz
@@ -86,18 +99,21 @@ sudo rm latest.tar.gz
 ```
 
 Set Permissions:
+
 ```sh
 sudo chown -R www-data:www-data /var/www/html
 sudo chmod -R 755 /var/www/html
 ```
 
 Configure WordPress:
+
 ```sh
 sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 sudo nano /var/www/html/wp-config.php
 ```
 
 Update the database settings in the `wp-config.php` file:
+
 ```php
 define( 'DB_NAME', 'wordpressdb' );
 define( 'DB_USER', 'wordpressuser' );
@@ -106,9 +122,11 @@ define( 'DB_HOST', 'localhost' );
 ```
 
 Restart Apache:
+
 ```sh
 sudo systemctl restart apache2
 ```
+
 ### Step 2: Complete WordPress Installation
 Open a Browser:
 Navigate to `http://<VM-IP>/wp-admin` and follow the WordPress setup wizard:
@@ -123,10 +141,13 @@ After installation, log in at `http://<VM-IP>/wp-admin`.
 ## Part 4: Installing LNMP Stack on the Second VM
 ### Step 1: Install Nginx
 Install Nginx:
+
 ```sh
 sudo apt install nginx -y
 ```
+
 Start and Enable Nginx:
+
 ```sh
 sudo systemctl start nginx
 sudo systemctl enable nginx
@@ -142,15 +163,19 @@ Create a Database and User for WordPress (if not done in Part 2).
 
 ### Step 3: Install PHP and PHP-FPM
 Install PHP and PHP-FPM:
+
 ```sh
 sudo apt install php-fpm php-mysql -y
 ```
 
 Configure Nginx to Use PHP:
+
 ```sh
 sudo nano /etc/nginx/sites-available/default
 ```
+
 Update the server block to handle PHP files:
+
 ```nginx
 server {
     listen 80;
@@ -175,6 +200,7 @@ server {
 ```
 
 Restart Nginx and PHP-FPM:
+
 ```sh
 sudo systemctl restart nginx
 sudo systemctl restart php7.4-fpm
@@ -186,14 +212,17 @@ Download and Extract WordPress:
 
 Follow the same steps as in Part 3 to download and configure WordPress.
 Set Permissions:
+
 ```sh
 sudo chown -R www-data:www-data /var/www/html
 sudo chmod -R 755 /var/www/html
 ```
+
 Configure WordPress (edit wp-config.php):
 
 Same as in Part 3.
 Restart Nginx:
+
 ```sh
 sudo systemctl restart nginx
 ```

@@ -3,6 +3,7 @@
 ## Lab Setup
 1.	Ensure you have a Web Browser installed (In this Lab Google Chrome has been used).
 2.	Ensure you have cURL installed on your system. You can check this by running the following command in the terminal: 
+
 ```sh
 curl --version
 ```
@@ -12,6 +13,7 @@ HTTP headers are key-value pairs that carry essential information between the cl
 ## Step 1: Viewing HTTP Headers Using cURL
 1.	Open your terminal.
 2.	Run the following cURL command to make a `GET` request to a sample website (e.g., example.com): 
+
     ```sh
     curl -I https://www.example.com
     ```
@@ -20,6 +22,7 @@ HTTP headers are key-value pairs that carry essential information between the cl
 
 ## Step 2: Exploring Different HTTP Methods with cURL
 1.	GET Request: Run the following command:
+
 ```sh
 curl -X GET https://jsonplaceholder.typicode.com/posts/1
 ```
@@ -27,6 +30,7 @@ curl -X GET https://jsonplaceholder.typicode.com/posts/1
 This sends a GET request to fetch the data for post ID 1.
 
 2. POST Request: Send a POST request to the same URL, adding some data:
+
 ```sh
 curl -X POST https://jsonplaceholder.typicode.com/posts -d "title=Test&body=This is a test post."
 ```
@@ -35,11 +39,13 @@ This simulates creating a new post.
 
 
 3. PUT Request: Update the post using the following command:
+
 ```sh
 curl -X PUT https://jsonplaceholder.typicode.com/posts/1 -d "title=Updated Title&body=Updated body"
 ```
 
 4. DELETE Request: Delete the post by running:
+
 ```sh
 curl -X DELETE https://jsonplaceholder.typicode.com/posts/1
 ```
@@ -80,12 +86,14 @@ Manipulating Headers Using Chrome DevTools
 ## Step 4: Practical Tasks with cURL and Chrome DevTools
 Checking for Redirection
 1.	Use both command and compare the results using curl and using the web browser
+
 ```sh
 curl -I https://httpstat.us/301
 curl -IL https://httpstat.us/301
 ```
 Observing HTTPS Handshake
 1.	Use cURL to fetch detailed SSL information:
+
 ```sh
 curl -v https://www.example.com
 ```
@@ -117,6 +125,7 @@ HTTP cookies are small pieces of data stored on the client side, usually sent by
 
 Inspecting Cookies Using cURL
 1.	Send a cURL request to a website that sets cookies in the response:
+
 ```sh
 curl -I https://www.example.com
 ```
@@ -126,11 +135,13 @@ Look for the Set-Cookie header in the response. This header sends cookies from t
 #### Observation:
 - The Set-Cookie header might contain attributes like Expires, Path, Domain, Secure, and HttpOnly.
 Use the -c option to store the cookies in a file:
+
     ```sh
     curl -c cookies.txt https://www.example.com
     ```
     This will save the cookies sent by the server into a file named cookies.txt.
     Send a subsequent request using the saved cookies:
+    
     ```sh
     curl -b cookies.txt https://www.example.com
     ```

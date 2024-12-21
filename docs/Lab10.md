@@ -15,30 +15,39 @@ This lab will only be using two free-tier AWS EC2 instances:
 
 2.	Install Nginx
 - SSH into each instance and update the system, then install Nginx:
+
 ```sh
 sudo apt update && sudo apt install nginx -y
 ```
+
 3.	Prepare each VM for testing:
 - Clone the Wordle Puzzle Game Replica from GitHub:
 Repo: [Wordle Game Repo](https://github.com/imananoosheh/wordle-replica-project/)
+
 ```sh
 git clone https://github.com/imananoosheh/wordle-replica-project.git
 ```
+
 4.	Set Up `vm-hosting-statics` with Local Assets
 - Copy the required files (index.html, script.js, styles.css) into the public web directory:
+
 ```sh
 sudo cp index.html script.js styles.css /var/www/html/
 ```
 
 - Remove the default Nginx page:
+
 ```sh
 sudo rm /var/www/html/index.nginx-debian.html
 ```
+
 - Check the Nginx syntax and restart the server:
+
 ```sh
 sudo nginx -t
 sudo systemctl restart nginx
 ```
+
 - Test the Wordle app in the browser at: `http://<vm-hosting-statics-IP>`
 
 5.	Set Up vm-using-cdn with CDN Links
@@ -54,18 +63,20 @@ After:
 ![use cdn files instead](images/lab10-fig3.png)
 
 - Copy index.html into the public web directory: 
+
 ```sh
 sudo cp index.html /var/www/html/
 ```
+
 - Remove the default Nginx page and restart Nginx:
+
 ```sh
 sudo rm /var/www/html/index.nginx-debian.html
 sudo nginx -t
 sudo systemctl restart nginx
 ```
+
 - Test in the browser at: `http://<vm-using-cdn-IP>`
-
-
 
 ## Part 2: Testing and Measuring Latencies
 1.	Measure Latency for Each Instance
@@ -85,6 +96,7 @@ sudo systemctl restart nginx
 - Log into vm-hosting-statics and check Nginx’s access logs in `/var/log/nginx/access.log`.
 2.	Analyze IP Logs
 - Use the following command to count and sort unique IP addresses accessing the server:
+
 ```sh
 awk '{print $1}' /var/log/nginx/access.log | sort | uniq -c | sort -nr
 ```

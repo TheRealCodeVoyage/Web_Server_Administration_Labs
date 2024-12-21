@@ -45,6 +45,7 @@ Please Navigate to the address below and Click to donwload the VMWare software b
 14. Last page before the installatio begin you can review your installation configurations. Hit Install.
 ![review page](images/lab1-fig13.png)
 15. After Installation is done. Login to your VM and update.
+
 ```sh
 sudo apt update && sudo apt upgrade -y
 ```
@@ -58,6 +59,7 @@ Multipass is a lightweight VM manager for Linux, Windows, and macOS that allows 
 - Download the installer and follow the installation instructions.
 2. Verify the Installation:
 - Open a terminal or command prompt and type:
+
 ```sh
 multipass version
 ```
@@ -65,31 +67,37 @@ multipass version
 Using Multipass
 3. Launch an Ubuntu Instance:
 - To create and start a new Ubuntu instance, run:
+
 ```sh
 multipass launch --name my-ubuntu
 ```
 - Replace `my-ubuntu` with a name of your choice. This command will download the default Ubuntu image (usually the latest LTS version) and start the instance.
 4. Access the Ubuntu Instance:
 - To access the Ubuntu instance, use:
+
 ```sh
 multipass shell my-ubuntu
 ```
 - This command will drop you into a shell session within your Ubuntu instance, where you can start running commands as if you were using a regular Ubuntu machine.
 5. Managing Instances:
 - List Instances:
+
 ```sh
 multipass list
 ```
 This will show you all the instances you have created, along with their statuses.
 - Stop an Instance:
+
 ```sh
 multipass stop my-ubuntu
 ```
 - Delete an Instance:
+
 ```sh
 multipass delete my-ubuntu
 ```
 After deleting an instance, run the following command to free up space:
+
 ```sh
 multipass purge
 ```

@@ -10,10 +10,12 @@ If not already installed, install Multipass by following instructions on the off
 
 - Run the following command to launch a new Ubuntu VM:
     - For Windows Machines:
+    
     ```sh
     multipass launch --name apache-server --memory 1G --disk 5G –network Wi-Fi
     ```
     - For Unix-based Machines:
+
     ```sh
     multipass launch --name apache-server --memory 1G --disk 5G
     ```
@@ -22,6 +24,7 @@ If not already installed, install Multipass by following instructions on the off
 ### Step 3: Access the VM
 
 - Once the VM is running, access it by executing:
+
 ```sh
 multipass shell apache-server
 ```
@@ -30,6 +33,7 @@ You are now inside the VM, ready to install and configure Apache.
 ### Step 4: Update the Package Manager
 
 - Before installing Apache, update the package list:
+
 ```sh
 sudo apt update
 ```
@@ -37,6 +41,7 @@ sudo apt update
 ### Step 5: Install Apache
 
 - Install the Apache web server using the following command:
+
 ```sh
 sudo apt install apache2 -y
 ```
@@ -44,6 +49,7 @@ sudo apt install apache2 -y
 ### Step 6: Verify Apache Installation
 
 - To verify if Apache was installed successfully, check the status of the service:
+
 ```sh
 sudo systemctl status apache2
 ```
@@ -52,6 +58,7 @@ If Apache is running, you should see a status of "active (running)."
 ### Step 7: Test Apache Installation
 
 - Open a web browser on your local machine and type the VM's IP address. Use this command in the VM to find the IP address:
+
 ```sh
 multipass info apache-server
 ```
@@ -60,6 +67,7 @@ multipass info apache-server
 ### Step 8: Create a Simple HTML Page
 
 - Replace the default Apache page with a custom HTML page:
+
 ```sh
 sudo rm /var/www/html/index.html
 echo "<h1>Welcome to My Simple Website</h1>" | sudo tee /var/www/html/index.html
@@ -71,6 +79,7 @@ echo "<h1>Welcome to My Simple Website</h1>" | sudo tee /var/www/html/index.html
 ### Step 10: Apache Configuration Files
 
 - Apache’s main configuration file is located at `/etc/apache2/apache2.conf`. You can open it for viewing with:
+
 ```sh
 sudo nano /etc/apache2/apache2.conf
 ```
@@ -78,6 +87,7 @@ sudo nano /etc/apache2/apache2.conf
 ### Step 11: Enabling Modules
 
 - Apache has various modules that extend its functionality. Enable the rewrite module (for URL rewriting):
+
 ```sh
 sudo a2enmod rewrite
 sudo systemctl restart apache2
@@ -87,11 +97,13 @@ sudo systemctl restart apache2
 
 - Apache allows you to host multiple websites on a single server using virtual hosts.
 Create a new directory for your virtual host:
+
 ```sh
 sudo mkdir /var/www/mywebsite
 echo "<h1>My Website</h1>" | sudo tee /var/www/mywebsite/index.html
 ```
 - Create a new virtual host configuration file:
+
 ```sh
 sudo nano /etc/apache2/sites-available/mywebsite.conf
 ```
@@ -110,11 +122,13 @@ sudo nano /etc/apache2/sites-available/mywebsite.conf
 ### Step 13: Enabling Virtual Host
 
 - Enable the newly created virtual host:
+
 ```sh
 sudo a2ensite mywebsite.conf
 sudo systemctl reload apache2
 ```
 - Test the configuration syntax to ensure there are no errors:
+
 ```sh
 sudo apachectl configtest
 ```
@@ -138,6 +152,7 @@ Add the following line (replace `<vm-ip-address>` with the actual IP):
 
 - Go back to apache-server shell
 - Ensure that Apache is configured correctly in the firewall:
+
 ```sh
 sudo ufw allow 'Apache'
 sudo ufw enable
@@ -147,6 +162,7 @@ sudo ufw status
 ### Step 17: Configuring Directory Permissions
 
 - Set custom permissions for your website directories. Open the Apache configuration file:
+
 ```sh
 sudo nano /etc/apache2/apache2.conf
 ```
@@ -164,6 +180,7 @@ sudo nano /etc/apache2/apache2.conf
 ### Step 18: Setting Up Server Security Headers
 
 - Add security headers to improve the security of your web server:
+
 ```sh
 sudo nano /etc/apache2/conf-available/security.conf
 ```
@@ -185,6 +202,7 @@ Header always set X-XSS-Protection "1; mode=block"
 `X-XSS-Protection "1; mode=block"`: This header enables the browser’s built-in cross-site scripting (XSS) filter. When a potential XSS attack is detected, the browser will block the page from loading, protecting the user from malicious content.
 
 - Enable the Headers Module and Restart Apache
+
 ```sh
 sudo a2enmod headers
 sudo systemctl restart apache2
@@ -192,6 +210,7 @@ sudo systemctl restart apache2
 
 ### Step 19: Remove the VM
 - Once you are done, exit the VM and stop it:
+
 ```sh
 exit
 multipass delete apache-server
@@ -241,12 +260,14 @@ From your local machine, open a browser and go to `http://<instance-public-ip>`.
 ### Step 7: Create a Simple HTML Page
 
 - Open File Explorer and navigate to the default IIS web root:
-```
+
+```plaintext
 C:\inetpub\wwwroot
 ```
 
 - Delete the existing iisstart.htm file and replace it with a new HTML file:
 - Create a file named index.html with the following content:
+
 ```html
 <h1>Welcome to My IIS Website</h1>
 ```
@@ -268,6 +289,7 @@ C:\inetpub\wwwroot
 First, create a new folder for the site: `C:\MyWebsite`
 
 - Place an `index.html` file in this folder with the content:
+
 ```html
 <h1>This is My New Website</h1>
 ```

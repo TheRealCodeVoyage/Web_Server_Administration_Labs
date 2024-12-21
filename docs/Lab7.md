@@ -27,6 +27,7 @@ Host file in Linux/MacOs: `/etc/hosts`
 4)	To install NPM and Express globally, run commands below:
 
 ![Install NPM](images/lab7-fig5.png)
+
 ```sh
 sudo apt install npm
 sudo npm install -g express-generator
@@ -35,9 +36,11 @@ cd lab7-oauth && sudo npm install
 ```
 
 5)	Turn on the project with command:
+
 ```sh
 sudo npm start
 ```
+
 ![start NPM](images/lab7-fig6.png)
 To verify: Open a browser in your Host Machine and hit: 
 
@@ -70,6 +73,7 @@ If you have followed the instruction and used nano as your text editor, you can 
 ![rename files](images/lab7-fig13.png)
 
 9)	Change `index.ejs` contents to:
+
 ```html
 <html>
     <body>
@@ -77,6 +81,7 @@ If you have followed the instruction and used nano as your text editor, you can 
     </body>
 </html>
 ```
+
 ![index.ejs content](images/lab7-fig14.png) 
 
 10)	In the folder “routes”, change `index.js` contents
@@ -155,9 +160,11 @@ In the dropdown, choose “OAuth client ID”
 1)	Open a Linux shell (Or Ctrl+C to stop the project), and then run:
 
 ![Install requirements](images/lab7-fig34.png)
+
 ```sh
 sudo npm install passport express-session passport-google-oauth20 --save
 ```
+
 2)	In `app.js`, around line #10 in the importing section, add codes below. 
 
 Note: if you use `nano`, you use `nano -l` to display line numbers. 
@@ -183,6 +190,7 @@ cb(null, profile);
  
 
 Around line #27, right after express app has been defined, add:
+
 ```js
 app.use(session({secret: 'cat'}));
 app.use(passport.initialize());
@@ -194,6 +202,7 @@ passport.deserializeUser(function(user, done) {
     done(null, user);
 });
 ```
+
 ![express app modification](images/lab7-fig37.png)
 
 3)	Save the file (`CTRL + S`) and (`CTRL + X`) get back to the shell.
@@ -206,15 +215,19 @@ passport.deserializeUser(function(user, done) {
 1)	In file `app.js` Under other routes related imports we need to add the auth.js file which we will create in the next step.
 
 Around Line #9, in the importing section:
+
 ```js
 var auth = require ('./routes/auth');
 ```
+
 ![import auth](images/lab7-fig39.png)
 
 around Line #39, where rest of the views are being defined for express app:
+
 ```js
 app.use('/auth', auth);
 ```
+
 ![add auth to express app](images/lab7-fig40.png)
 
 Don’t Forget: Save and Exit.
@@ -241,11 +254,13 @@ router.route('/google').get(
 
 module.exports = router;
 ```
+
 ![add oauth routes](images/lab7-fig41.png)
 
 Save and Exit.
 
 4)	In directory/folder named views, create a file named `users.ejs`
+
 ```html
 <html>
     <head></head>
@@ -256,12 +271,14 @@ Save and Exit.
 </body>
 </html> 
 ```
+
 ![change users.ejs](images/lab7-fig42.png)
     
 Save and Exit.
 
 
 5)	Change `index.js` contents to: Note: you can find it in your routes directory.
+
 ```js
 var express = require('express');
 var router = express.Router();
@@ -279,9 +296,11 @@ router.get('/', function(req, res, next) {
 
 module.exports = router;
 ```
+
 ![home page route](images/lab7-fig43.png)
 
 6)	Change `index.ejs` contents to:
+
 ```html
 <html><body>  
 <%=title %><br/>
@@ -295,6 +314,7 @@ module.exports = router;
 </ul>
 </body></html>
 ```
+
 ![login page](images/lab7-fig44.png)
  
 7)	 Restart the app, and then verify it in a browser.
