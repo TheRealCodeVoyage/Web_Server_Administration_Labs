@@ -224,9 +224,12 @@ multipass purge
 - Log in to the AWS Management Console and navigate to the EC2 Dashboard.
 - Click Launch Instance and configure the following:
     - AMI: Select a Windows Server 2019 (or later) AMI.
+    ![](images/lab2-fig1.png)
     - Instance Type: Choose a t2.micro (free tier eligible).
+    ![](images/lab2-fig2.png)
     - Key Pair: Select an existing key pair or create a new one to access the instance.
     - Security Group: Ensure that port 80 (HTTP) and port 3389 (RDP) are open.
+    ![](images/lab2-fig4.png)
 - Launch the instance.
 
 ### Step 2: Access the EC2 Instance
@@ -236,32 +239,42 @@ multipass purge
 - Download the RDP file and use your key pair to retrieve the password.
 - Log in to the instance using the administrator credentials.
 
+On Windows Machine: You can simply double click and execute the `.rdp` file
+On Linux/MacOS: You can download Microsoft Remote Desktop and import you `.rdp` file there.
+
+
 ### Step 3: Open Server Manager
 
 - Once logged in to your Windows Server, open Server Manager from the taskbar or the Start menu.
+![](images/lab2-fig5.png)
 
 ### Step 4: Add IIS Role
 
-- In Server Manager, click on Add roles and features.
-- Select Role-based or feature-based installation.
-- Select your server (should be listed automatically).
-- On the Select server roles page, scroll down and check the box for Web Server (IIS).
-- Click Next through the wizard until the Install button is available, and then click Install.
+- In Server Manager, click on Add roles and features. Hit next.
+![](images/lab2-fig6.png)
+- Select Role-based or feature-based installation. Hit next.
+- Select your server (should be listed automatically). Hit next.
+- At the _Server Roles_ section, scroll down and check the box for _Web Server (IIS)_.
+- Rest of the installtion is based on default configuration so click Next through the wizard until the Install button is available, and then click Install.
+![](images/lab2-fig7.png)
 
 ### Step 5: Verify IIS Installation
 
-- Once the installation completes, open a web browser inside the Windows Server and type http://localhost. You should see the default IIS welcome page.
+- Once the installation completes, close the installation page and open a web browser inside the Windows Server and type http://localhost. You should see the default IIS welcome page.
+![](images/lab2-fig8.png)
 
 ### Step 6: Test IIS from Your Local Machine
 
 - Find the public IP address of your EC2 instance from the AWS EC2 Dashboard.
+![](images/lab2-fig9.png)
 From your local machine, open a browser and go to `http://<instance-public-ip>`. The IIS default page should appear, confirming the server is reachable.
+![](images/lab2-fig10.png)
 
 ### Step 7: Create a Simple HTML Page
 
 - Open File Explorer and navigate to the default IIS web root:
 
-```plaintext
+```powershell
 C:\inetpub\wwwroot
 ```
 
@@ -272,32 +285,37 @@ C:\inetpub\wwwroot
 <h1>Welcome to My IIS Website</h1>
 ```
 
+![](images/lab2-fig11.png)
+
 ### Step 8: Test the Website
 
 - From your local machine, refresh the browser pointing to your EC2 instance’s public IP. You should now see the custom message: “Welcome to My IIS Website.”
 
-
+![](images/lab2-fig12.png)
 
 ### Step 9: IIS Manager Overview
 
 - Open IIS Manager from the Start menu (type `inetmgr`).
+![](images/lab2-fig13.png)
 - In the left-hand pane, you’ll see your server name. Expand it to see Sites and the Default Web Site.
 
 ### Step 10: Creating a New Website
 
 - Let’s create a new website with a custom folder.
-First, create a new folder for the site: `C:\MyWebsite`
+First, create a new folder for the site: `C:\mywebsite`
 
 - Place an `index.html` file in this folder with the content:
 
 ```html
 <h1>This is My New Website</h1>
 ```
-
+![](images/lab2-fig14.png)
+- Make sure do delete the default website before you adding a new one.
+![](images/lab2-fig15.png)
 - In IIS Manager, right-click Sites and select Add Website.
 - Fill in the following:
-    - Site Name: `MyWebsite`
-    - Physical Path: `C:\MyWebsite`
+    - Site Name: `mywebsite`
+    - Physical Path: `C:\mywebsite`
     - Binding: Use the default HTTP on port `80`.
 - Click OK to create the new site.
 
@@ -311,10 +329,13 @@ First, create a new folder for the site: `C:\MyWebsite`
 ### Step 12: Configuring Virtual Directories
 
 - A virtual directory allows you to map a folder to a URL path.
-- In IIS Manager, right-click your MyWebsite and select Add Virtual Directory.
-- For the Alias, enter images, and for the Physical Path, create a folder `C:\MyWebsite\Images`.
-- Place an image in the Images folder.
+- In IIS Manager, right-click your mywebsite and select Add Virtual Directory.
+- For the Alias, enter `images`, and for the Physical Path, create a folder `C:\mywebsite\images`.
+![](images/lab2-fig16.png)
+- Place an image in the images folder.
+![](images/lab2-fig17.png)
 You can now access this image by navigating to `http://<instance-public-ip>/images/<image-file-name>`.
+![](images/lab2-fig18.png)
 
 ### Step 13: Enabling Directory Browsing
 
@@ -323,6 +344,7 @@ You can now access this image by navigating to `http://<instance-public-ip>/imag
     Double-click Directory Browsing in the features view.
     On the right-hand side, click Enable.
 - Now you can navigate to `http://<instance-public-ip>/images/` to see a list of files in the images directory.
+![](images/lab2-fig19.png)
 
 ### Step 14: Setting Custom Error Pages
 - You can configure IIS to show custom error pages.
@@ -333,6 +355,9 @@ You can now access this image by navigating to `http://<instance-public-ip>/imag
 ```html
 <h1>Oops! Page not found.</h1>
 ```
+
+![](images/lab2-fig20.png)
+![](images/lab2-fig22.png)
 
 ### Step 15: Logging and Monitoring
 
