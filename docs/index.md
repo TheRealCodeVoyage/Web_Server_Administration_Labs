@@ -14,6 +14,11 @@ course. This course introduces students to the deployment and operation of web a
 - [Lab 9: Nginx as Load Balancer, Forward Proxy, and Reverse Proxy](Lab9.md)  
 - [Lab 10: CDN and Logging](Lab10.md)  
 
+
+## Project Index
+- [Project 1: Research and Deployment of a Professional Portfolio Web Server](Project1.md)
+- [Project 2: High-Availability Portfolio with OAuth and GitHub Contributions](Project2.md)
+
 ### Key Learning Outcomes
 - Describe components of a scalable, distributed web stack.  
 - Set up, manage, and deploy web servers.  
