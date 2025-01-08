@@ -21,6 +21,7 @@ Please Navigate to the address below and Click to donwload the VMWare software b
 ## Install Ubuntu Desktop OS on VMWare Workstation Pro
 
 1. Download the latest LTS version of Ubuntu from [Ubuntu.com](https://ubuntu.com/download/desktop)
+- Note: If you have MacBook with M series CPU (ARM Achitecture) Download the image from here: [Ubuntu 24.10: 64-bit ARM (ARMv8/AArch64) desktop image](https://cdimage.ubuntu.com/releases/24.10/release/)
 2. After download of Ubuntu `.ios` file.
 3. Move over to VMWare Workstation Pro. Proceed to create a new Virtual Machine. (Note: your VMWare dashboard/UI most probably are different)
 ![Create New VM](images/lab1-fig4.png)
@@ -63,6 +64,8 @@ Multipass is a lightweight VM manager for Linux, Windows, and macOS that allows 
 ```sh
 multipass version
 ```
+
+- Note: Preferably restart you machine and then open the multipass GUI from the app menu
 - This command should return the version of Multipass installed, confirming the installation was successful.
 Using Multipass
 3. Launch an Ubuntu Instance:
