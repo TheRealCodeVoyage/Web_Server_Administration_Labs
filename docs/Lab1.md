@@ -109,7 +109,7 @@ Multipass also allows you to configure networking, mount directories from your h
 ## Launching a Virtual Machine with Linux
 
 1. Log in to your AWS Management Console.
-2. Ensure that you are in the desired AWS region for this lab (N. Virginia or US East). - Open the Amazon EC2 service in the AWS Management Console.
+2. Ensure that you are in the desired AWS region for this lab (region closest to you. eg: US West). - Open the Amazon EC2 service in the AWS Management Console.
 3. Click on "Launch Instance" to start the instance launch wizard as shown below:
 ![AWS Dashboard](images/lab1-fig14.png)
 - Select an Amazon Machine Image (AMI) that provides a Linux-based operating system, such as Amazon Linux or Ubuntu.
@@ -125,9 +125,8 @@ Multipass also allows you to configure networking, mount directories from your h
 - Create a new security group and configure inbound rules to allow SSH access (port 22) from
 your IP address.
 - Review the instance details and click "Launch."
-- Select an existing key pair or create a new one to access the instance securely via SSH (Download the
-key pair file to your local machine).
+- Select an existing key pair or create a new one to access the instance securely via SSH (Download the key pair file to your local machine).
+- Only on Linux or MacOS **you must** Change the permissions of the key pair file to the appropriate permissions
 6. Launch the instance and wait for it to start.
 7. Once the instance is running, note down the public IP address.
-8. Change the permissions of the key pair file to the appropriate permissions
-9. Connect to the VM using SSH from your computer and run some basic Linux commands like: `ls`, `pwd`, `hostname`.
+8. Connect to the VM using SSH from your computer and run some basic Linux commands like: `ls`, `pwd`, `hostname`.
