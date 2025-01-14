@@ -12,7 +12,7 @@ If not already installed, install Multipass by following instructions on the off
     - For Windows Machines:
     
     ```sh
-    multipass launch --name apache-server --memory 1G --disk 5G –network Wi-Fi
+    multipass launch --name apache-server --memory 1G --disk 5G --network bridged
     ```
     - For Unix-based Machines:
 
