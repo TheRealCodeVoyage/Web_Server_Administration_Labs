@@ -57,7 +57,7 @@ curl -X DELETE https://jsonplaceholder.typicode.com/posts/1
 
 ## Step 3: Exploring HTTP Headers with Google Chrome DevTools
 Viewing Request Headers in Chrome
-1.	Open Google Chrome and navigate to https://www.example.com.
+1.	Open Google Chrome and navigate to https://www.google.com.
 2.	Right-click on the page and select Inspect to open DevTools.
 3.	Navigate to the Network tab.
 4.	Reload the page to capture network activity.
@@ -88,8 +88,8 @@ Checking for Redirection
 1.	Use both command and compare the results using curl and using the web browser
 
 ```sh
-curl -I https://httpstat.us/301
-curl -IL https://httpstat.us/301
+curl -I http://httpstat.us/301
+curl -IL http://httpstat.us/301
 ```
 Observing HTTPS Handshake
 1.	Use cURL to fetch detailed SSL information:
@@ -104,12 +104,12 @@ o	Open the Security tab in DevTools.
 o	Click on View Certificate to examine the SSL certificate details.
 
 #### Questions:
-- What type of SSL certificate is the site using?
-- What is the TLS version displayed by cURL?
+- Where can you fetch the SSL/TLS Certificate of the Website and details about it?
+- What is the TLS version displayed by cURL? (If it did)
 
 
 Observing Redirection in Google Chrome DevTools
-1.	Open Google Chrome and navigate to a website that performs a redirection (e.g., https://httpstat.us/301).
+1.	Open Google Chrome and navigate to a website that performs a redirection (e.g., http://httpstat.us/301).
 2.	Open DevTools (Right-click -> Inspect -> Network tab).
 3.	Reload the page to capture the network activity.
 4.	In the Name column, select the first request (the one that initiates the redirection).
@@ -127,7 +127,7 @@ Inspecting Cookies Using cURL
 1.	Send a cURL request to a website that sets cookies in the response:
 
 ```sh
-curl -I https://www.example.com
+curl -I https://www.httpstat.us
 ```
 
 Look for the Set-Cookie header in the response. This header sends cookies from the server to the client.
@@ -137,13 +137,13 @@ Look for the Set-Cookie header in the response. This header sends cookies from t
 Use the -c option to store the cookies in a file:
 
     ```sh
-    curl -c cookies.txt https://www.example.com
+    curl -c cookies.txt https://www.httpstat.us
     ```
     This will save the cookies sent by the server into a file named cookies.txt.
     Send a subsequent request using the saved cookies:
     
     ```sh
-    curl -b cookies.txt https://www.example.com
+    curl -b cookies.txt https://www.httpstat.us
     ```
     This uses the stored cookies in cookies.txt to maintain the session.
 
@@ -152,7 +152,7 @@ Use the -c option to store the cookies in a file:
 - Do the cookies have an expiration date? If so, what is it?
 
 Viewing and Manipulating Cookies in Chrome DevTools
-- Open Google Chrome and navigate to a website that sets cookies (e.g., https://www.example.com).
+- Open Google Chrome and navigate to a website that sets cookies (e.g., https://www.httpstat.us).
 - Open DevTools and go to the Application tab.
 - In the left-hand panel, under the Storage section, click on Cookies to see the list of cookies set by the website.
 - Select the website domain to view the cookies stored by the browser for that domain. Examine attributes like Name, Value, Domain, Path, Expires/Max-Age, and HttpOnly.
