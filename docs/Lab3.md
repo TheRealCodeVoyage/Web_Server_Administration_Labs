@@ -137,13 +137,13 @@ Look for the Set-Cookie header in the response. This header sends cookies from t
 Use the -c option to store the cookies in a file:
 
     ```sh
-    curl -c cookies.txt https://www.httpstat.us
+    curl -c cookies.txt https://httpstat.us
     ```
     This will save the cookies sent by the server into a file named cookies.txt.
     Send a subsequent request using the saved cookies:
     
     ```sh
-    curl -b cookies.txt https://www.httpstat.us
+    curl -b cookies.txt https://httpstat.us
     ```
     This uses the stored cookies in cookies.txt to maintain the session.
 
