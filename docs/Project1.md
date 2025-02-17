@@ -32,11 +32,6 @@ In this project, students will research the Caddy web server, deploy it locally 
 
    - Any challenges or limitations with Caddy compared to others.
 
-**Deliverables:**
-
-- Video presentation (10-15 minutes).
-- Slides (clear and professional).
-- Report summarizing findings with references and citations. 📑📊
 
 ---
 
@@ -66,11 +61,6 @@ In this project, students will research the Caddy web server, deploy it locally 
 - Write a Caddyfile to serve the portfolio website locally.
 - Include explanations for the configuration (e.g., reverse proxy, static file serving).
 
-**Deliverables:**
-
-- Screenshots of the working website (portfolio with resume and projects).
-- The Caddyfile with annotations.
-- Screenshots or a short video showing the website running locally. 🌟📷
 
 ---
 
@@ -98,15 +88,25 @@ In this project, students will research the Caddy web server, deploy it locally 
 - Deploy the portfolio website from Part 2 to the cloud instance.
 - Test functionality and troubleshoot issues.
 
-**Deliverables:**
-
-- Functional portfolio accessible via the domain with HTTPS.
-- Screenshots showing:
-  - Domain and HTTPS configuration.
-  - The portfolio website live on the domain.
-- Documentation of troubleshooting steps. ✅📋
 
 ---
+
+### **Project 1 Deliverables ✅**
+1. Slides (clear and professional): Report summarizing findings (from Part 1) with references and citations. 📑📊
+2. A written report: (for Part 2 and Part 3)
+
+  - Include Screenshot of working and functional website
+
+  - The Caddyfile with annotations.
+
+  - Documentation of troubleshooting steps.
+
+  - The URL of Functional portfolio accessible via the domain with HTTPS.
+
+  - Note: Writing the report in Markdown (.md file) is highly **encouraged** but **not mandatory**.
+ 
+3. **(Optional: if you are presenting your slides and Demoing all in-class)**
+Video presentation (10-15 minutes): Go over Slides (from Part 1) and then proceed to Demo of the Part 2 and Part 3 
 
 ### **Project 1 Grading Criteria: 🏆📊**
 
